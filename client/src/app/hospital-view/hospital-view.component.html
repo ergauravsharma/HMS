@@ -1,0 +1,63 @@
+<h1 class="text-center mt-20">Hospital List</h1>
+<div class="mat-elevation-z10">
+
+  <p>Click on headers to sort the table</p>
+
+<form>   
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Hospital Name" formControlName="hospitalname">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Contact Number" formControlName="contactnumber">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addNew()">Save</button>
+
+  </form>
+
+    <table mat-table [dataSource]="dataSourceToday" #mytable matSort>
+      
+      <ng-container matColumnDef="hospitalname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header > Name </th>
+        <td mat-cell *matCellDef="let element" > {{element.hospitalname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contactnumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.contactnumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> View Department</th>
+        <td mat-row mat-cell *matCellDef="let element; let i = index; let row" >
+            <button mat-icon-button color="primary" class="push-right"
+            [routerLink]="['/department/', element.hospitalname]" >
+              <mat-icon matTooltip="Click to View">visibility</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action2"> 
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-row mat-cell *matCellDef="let element; let i = index; let row" >
+        <button mat-icon-button color="warn"  class="push-right" 
+        [routerLink]="['edit/', element.hospitalname]">
+        <mat-icon matTooltip="Click to Edit">edit</mat-icon></button>
+      </td>
+    </ng-container>
+
+      <ng-container matColumnDef="action3"> 
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-row mat-cell *matCellDef="let element; let i = index; let row" >
+        <button mat-icon-button color="warn"  class="push-right" 
+        (click)="deleteItem( row.hospitalname, row.contactnumber)">
+        <mat-icon matTooltip="Click to Delete">delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsToday"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsToday; ">
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
