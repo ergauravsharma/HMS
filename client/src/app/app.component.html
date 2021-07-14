@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span>Hospital Management System</span>
+    <mat-icon>local_hospital</mat-icon>
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon home" routerLink="/"  aria-label="Example icon-button with share icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-button class="example-icon home" routerLink="/department" routerLinkActive="active"  aria-label="Example icon-button with share icon">
+      Department    
+    </button>
+  
+</mat-toolbar>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
+
